@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/tree1.fbx-1fde718742ed0360004dffdddc1ccd8e.scn"
+path="res://.import/tree1.glb-bf52405ff73487333785e251557357ac.scn"
 
 [deps]
 
-source_file="res://assets/SceneObj/tree1.fbx"
-dest_files=[ "res://.import/tree1.fbx-1fde718742ed0360004dffdddc1ccd8e.scn" ]
+source_file="res://assets/SceneObj/tree1.glb"
+dest_files=[ "res://.import/tree1.glb-bf52405ff73487333785e251557357ac.scn" ]
 
 [params]
 

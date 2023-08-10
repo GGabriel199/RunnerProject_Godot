@@ -37,9 +37,6 @@ rect_rotation = 270.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SPEEDBTN" type="Button" parent="Control"]
 margin_left = 7.34314
@@ -49,25 +46,27 @@ margin_bottom = 541.0
 text = "SPEED"
 
 [node name="DISTANCE" type="Label" parent="Control"]
-margin_left = 831.0
-margin_top = 15.0
-margin_right = 1011.0
-margin_bottom = 32.0
+margin_left = 285.0
+margin_top = 19.0
+margin_right = 465.0
+margin_bottom = 36.0
 text = "2000 Distance"
 align = 2
 
 [node name="COINS" type="Label" parent="Control"]
-margin_left = 831.0
-margin_top = 32.0
-margin_right = 1011.0
-margin_bottom = 49.0
+margin_left = 285.0
+margin_top = 36.0
+margin_right = 465.0
+margin_bottom = 53.0
 text = "30 Coins"
 align = 2
 
 [node name="SPEED" type="Label" parent="Control"]
-margin_left = 831.0
-margin_top = 49.0
-margin_right = 1011.0
-margin_bottom = 66.0
+margin_left = 285.0
+margin_top = 53.0
+margin_right = 465.0
+margin_bottom = 70.0
 text = "2 SPEED"
 align = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]

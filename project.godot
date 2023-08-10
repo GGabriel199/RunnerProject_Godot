@@ -32,7 +32,7 @@ ObjectPooling="*res://addons/object_pooling/ObjectPooling.gd"
 [display]
 
 window/size/width=480
-window/size/height=640
+window/size/height=840
 window/handheld/orientation="portrait"
 
 [editor_plugins]

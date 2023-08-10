@@ -151,9 +151,10 @@ func on_die():
 	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/dead/blend_amount", 1.0)
 
 func on_toggle_magnet(activate):
-	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/magnet/blend_amount", int(activate))
+	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/magnet/blend_amount", 0.5)
 	$ANCHOR/MESH/MODEL/Purple/Armature/Skeleton/MAGNET.visible = activate
 	magnet_active = activate
+
 func on_magnet_collision(body):
 	if body.is_in_group("coin") and magnet_active:
 		Globals.emit_signal("on_coin_magnet_collision", body)

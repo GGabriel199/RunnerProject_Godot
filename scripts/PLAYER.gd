@@ -40,7 +40,7 @@ func _end_detection(position):
 	var direction = (position - swipe_start_position).normalized()
 	if abs(direction.x) + abs(direction.y) >= MAX_DIAGONAL_SLOPE:
 		return
-		
+
 	if abs(direction.x) > abs(direction.y): #Horizontal SWIPE
 		if (direction < swipe_start_position):
 			emit_signal('swiped_left', Vector2(-sign(direction.x), 0.0))

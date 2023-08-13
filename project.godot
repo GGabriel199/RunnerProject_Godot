@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ProjectRunner"
-run/main_scene="res://scenes/WORLD.tscn"
+run/main_scene="res://scenes/MENU.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -42,6 +42,7 @@ enabled=PoolStringArray( "object_pooling", "part_compiler" )
 [global]
 
 blend=false
+cena=false
 
 [importer_defaults]
 

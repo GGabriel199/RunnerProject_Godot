@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/SceneObj/Materiais_001.material" type="Material" id=1]
 [ext_resource path="res://assets/textures/buttons/tile001.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/textures/buttons/tile002.png" type="Texture" id=4]
 [ext_resource path="res://assets/models/fonts/new_dynamicfont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scripts/MENU.gd" type="Script" id=6]
+[ext_resource path="res://scenes/GUI/options_panel.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Image" id=61]
 data = {
@@ -2827,25 +2828,22 @@ current = true
 
 [node name="menu_diag" type="Control" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.003
-margin_bottom = -723.52
-rect_scale = Vector2( 1, 7.08 )
+anchor_bottom = 1.0
 
 [node name="play_button" type="TextureButton" parent="menu_diag"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -112.0
-margin_top = -13.3503
-margin_right = 144.0
-margin_bottom = 50.6497
-rect_scale = Vector2( 0.886321, 0.160541 )
+margin_left = -129.0
+margin_top = -177.0
+margin_right = 127.0
+margin_bottom = -113.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 2 )
 texture_disabled = ExtResource( 4 )
 
-[node name="Label" type="Label" parent="menu_diag/play_button"]
+[node name="play_txt" type="Label" parent="menu_diag/play_button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -128.0
@@ -2856,17 +2854,41 @@ text = "PLAY"
 align = 1
 valign = 1
 
+[node name="options_button" type="TextureButton" parent="menu_diag"]
+margin_left = 111.0
+margin_top = 746.0
+margin_right = 367.0
+margin_bottom = 810.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+texture_disabled = ExtResource( 4 )
+
+[node name="options_txt" type="Label" parent="menu_diag/options_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -128.0
+margin_bottom = -32.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 5 )
+text = "OPTIONS"
+align = 1
+valign = 1
+
 [node name="game_title" type="Label" parent="menu_diag"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -99.0
-margin_top = 4.09605
-margin_right = 1.0
-margin_bottom = 24.096
-rect_scale = Vector2( 2, 0.4 )
+margin_left = -153.0
+margin_top = 47.0
+margin_right = -53.0
+margin_bottom = 67.0
+rect_scale = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "RUNNER???"
 align = 1
 valign = 1
 
+[node name="options_panel" parent="menu_diag" instance=ExtResource( 7 )]
+visible = false
+
 [connection signal="pressed" from="menu_diag/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="menu_diag/options_button" to="." method="_on_options_button_pressed"]

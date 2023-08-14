@@ -22,6 +22,9 @@ var current_theme_index = 0
 var theme_switch_time = 45.0
 var part_lane_coordinates = []
 var current_direction = -Vector3.FORWARD
+var part_num = "res://scenes/parts"
+var part_num2 = "res://scenes/parts/parts2"
+var part_num3 = "res://scenes/parts/parts3"
 
 # This script controls the entire game state.
 # It spawns and moves the parts around the player
@@ -47,10 +50,10 @@ func _ready():
 func _process(delta):
 	current_speed += delta * 0.4
 	distance += delta * current_speed * 0.1
-	$Control/COINS.text = "%s Coins" % [int(coins)]
-	$Control/DISTANCE.text = "%s Distance" % [int(distance)]
-	$Control/SPEED.text = "%s Speed" % [int(current_speed)]
-	
+	$Control/VBoxContainer/COINS.text = "%s Coins |" % [int(coins)]
+	$Control/VBoxContainer/DISTANCE.text = "%s Distance |" % [int(distance)]
+	$Control/VBoxContainer/SPEED.text = "%s Speed" % [int(current_speed)]
+
 	# switch the theme based on time
 	theme_switch_time -= delta
 	if theme_switch_time <= 0.0:
@@ -230,14 +233,30 @@ func prepare_parts():
 	# and stores them inside parts by their theme (Space...)
 	# to store their scene paths
 	var dir = Directory.new()
-	var path = "res://scenes/parts"
-	if dir.open(path) == OK:
+
+	if dir.open(part_num) == OK and distance <= 200:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if !dir.current_is_dir():
 				var part = {
-					file = path + "/" + file_name,
+					file = part_num + "/" + file_name,
+					type = file_name.split('_')[0],
+					theme = file_name.split('_')[1],
+					difficulty = file_name.split('_')[2].replace(".tscn", "")
+				}
+				if !parts.has(part.theme):
+					parts[part.theme] = []
+				parts[part.theme].push_back(part)
+			file_name = dir.get_next()
+			
+	elif dir.open(part_num2) == OK and distance >= 200:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				var part = {
+					file = part_num2 + "/" + file_name,
 					type = file_name.split('_')[0],
 					theme = file_name.split('_')[1],
 					difficulty = file_name.split('_')[2].replace(".tscn", "")
@@ -247,7 +266,7 @@ func prepare_parts():
 				parts[part.theme].push_back(part) 
 			file_name = dir.get_next()
 	else:
-		print("WORLD.gd: error loading res://scenes/parts/*")
+		print("WORLD.gd: error loading res://scenes/parts/*/*")
 
 func preparte_obstacles():
 	# this method gets all scenes inside res://scenes/obstacles
@@ -313,3 +332,4 @@ func on_speed():
 	speed_time = 10.0
 	$Control/COINLEVEL.value = 0
 	$Control/SPEEDBTN.disabled = true
+

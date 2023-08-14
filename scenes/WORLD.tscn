@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/WORLD.gd" type="Script" id=1]
 [ext_resource path="res://scenes/PLAYER.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/models/fonts/new_dynamicfont.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/textures/buttons/pause_button.png" type="Texture" id=7]
 [ext_resource path="res://scripts/Ui_manager.gd" type="Script" id=8]
+[ext_resource path="res://assets/BGM/coin.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/BGM/hit.ogg" type="AudioStream" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.866667, 0, 1 )
@@ -47,33 +49,41 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -51.0
-margin_top = -89.0
-margin_right = 51.0
-margin_bottom = -37.0
+margin_left = -128.0
+margin_top = -98.0
+margin_right = 140.0
+margin_bottom = -28.0
+custom_fonts/font = ExtResource( 6 )
 text = "SPEED"
+icon = ExtResource( 4 )
+icon_align = 1
 
-[node name="DISTANCE" type="Label" parent="Control"]
-margin_left = 285.0
-margin_top = 19.0
-margin_right = 465.0
-margin_bottom = 36.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+margin_left = 335.0
+margin_top = 20.0
+margin_right = 460.0
+margin_bottom = 132.0
+
+[node name="DISTANCE" type="Label" parent="Control/VBoxContainer"]
+margin_right = 125.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 6 )
 text = "2000 Distance"
 align = 2
 
-[node name="COINS" type="Label" parent="Control"]
-margin_left = 285.0
-margin_top = 36.0
-margin_right = 465.0
-margin_bottom = 53.0
+[node name="COINS" type="Label" parent="Control/VBoxContainer"]
+margin_top = 24.0
+margin_right = 125.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 6 )
 text = "30 Coins"
 align = 2
 
-[node name="SPEED" type="Label" parent="Control"]
-margin_left = 285.0
-margin_top = 53.0
-margin_right = 465.0
-margin_bottom = 70.0
+[node name="SPEED" type="Label" parent="Control/VBoxContainer"]
+margin_top = 48.0
+margin_right = 125.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 6 )
 text = "2 SPEED"
 align = 2
 
@@ -152,6 +162,16 @@ __meta__ = {
 
 [node name="Ui_manager" type="Node" parent="."]
 script = ExtResource( 8 )
+
+[node name="BGAudio" type="Spatial" parent="."]
+
+[node name="coin_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
+stream = ExtResource( 9 )
+
+[node name="hit_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
+stream = ExtResource( 10 )
+
+[node name="dead_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
 
 [connection signal="pressed" from="Control/pause_menu/Panel/CenterContainer/VBoxContainer/resume_button" to="Ui_manager" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Control/pause_menu/Panel/CenterContainer/VBoxContainer/menu_button" to="Ui_manager" method="_on_menu_button_pressed"]

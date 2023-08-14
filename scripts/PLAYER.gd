@@ -48,7 +48,7 @@ func _end_detection(position):
 			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe/active", true)
 			switch_lane(-1)
 			print('Swiped LEFT')
-		elif (direction > swipe_start_position):
+		elif (direction < swipe_start_position):
 			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe_state/current", 1)
 			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe/active", true)
 			switch_lane(1)
@@ -139,16 +139,20 @@ func on_collision(body):
 	if body.is_in_group("coin"):
 		Globals.emit_signal("on_collect", "coin")
 		ObjectPooling.queue_free_instance(body)
+		$"../BGAudio/coin_sound".play()
 	if body.is_in_group("magnet"):
 		Globals.emit_signal("on_collect", "magnet")
 		ObjectPooling.queue_free_instance(body)
 	if body.is_in_group("obstacle"):
 		shake_intensity = 0.5
+		$"../BGAudio/hit_sound".play()
 		Globals.emit_signal("on_obstacle")
 
 func on_die():
 	dead = true
+	$"../BGAudio/dead_sound".play()
 	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/dead/blend_amount", 1.0)
+	
 
 func on_toggle_magnet(activate):
 	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/magnet/blend_amount", 0.5)

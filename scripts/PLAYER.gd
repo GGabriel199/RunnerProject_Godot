@@ -14,50 +14,42 @@ var vertical_force = 0.0
 var magnet_active = false
 var dead = false
 
-signal swiped(direction)
-signal swiped_canceled(start_position)
+const threshold := 5000
+var swipe_start_position : Vector2
+var swipe_end_position : Vector2
 
-export (float, 1.0, 1.5) var MAX_DIAGONAL_SLOPE = 1.3
-
-onready var timer = $Timer
-var swipe_start_position = Vector2()
 
 #region SWIPE EVENT
-func _input(event):
-	if not event is InputEventScreenTouch:
-		return
-	if event.pressed:
-		_start_detection(event.position)
-	elif not timer.is_stopped():
-		_end_detection(event.position)
+func _input(event: InputEvent):
+	if Input.is_action_just_pressed("click"):
+		swipe_end_position = event.position
 		
-func _start_detection(position):
-	swipe_start_position = position
-	timer.start()
-	
-func _end_detection(position):
-	timer.stop()
-	var direction = (position - swipe_start_position).normalized()
-	if abs(direction.x) + abs(direction.y) >= MAX_DIAGONAL_SLOPE:
-		return
+	if Input.is_action_just_released("click"):
+		swipe_end_position = event.position
+		_end_detection()
 
-	if abs(direction.x) > abs(direction.y): #Horizontal SWIPE
-		if (direction < swipe_start_position):
-			emit_signal('swiped_left', Vector2(-sign(direction.x), 0.0))
-			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe_state/current", 0)
-			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe/active", true)
-			switch_lane(-1)
-			print('Swiped LEFT')
-		elif (direction < swipe_start_position):
-			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe_state/current", 1)
-			$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe/active", true)
-			switch_lane(1)
-			print('Swiped RIGHT')
-			
-	elif abs(direction.x) < abs(direction.y) and $ANCHOR/MESH.transform.origin.y < 1: #Vertical SWIPE
-		emit_signal('swiped_up', Vector2(0.0, -sign(direction.y)))
-		vertical_force = 5
-		print('Swiped UP')
+func _end_detection():
+	var d = swipe_end_position - swipe_start_position
+	
+	if d.length_squared() > threshold:
+		if abs(d.x) > abs(d.y): #swipe horizontal
+			if d.x < 0: #swipe left
+				$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe_state/current", 0)
+				$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe/active", true)
+				switch_lane(-1)
+				print('Swiped LEFT')
+			elif d.x > 0: #swipe right
+				$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe_state/current", 1)
+				$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/strafe/active", true)
+				switch_lane(1)
+				print('Swiped RIGHT')
+				
+		elif abs(d.x) < abs(d.y) and $ANCHOR/MESH.transform.origin.y < 1: #Vertical SWIPE
+			if d.y < 0:
+				vertical_force = 4
+				print('Swiped UP')
+			else:
+				print('Swiped DOWN')
 
 func _ready():
 	cam_position = $ANCHOR/MESH/Camera.transform.origin
@@ -163,6 +155,3 @@ func on_magnet_collision(body):
 	if body.is_in_group("coin") and magnet_active:
 		Globals.emit_signal("on_coin_magnet_collision", body)
 
-
-func _on_Timer_timeout():
-	emit_signal('swipe_canceled', swipe_start_position)

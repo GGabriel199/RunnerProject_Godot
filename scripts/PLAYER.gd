@@ -49,6 +49,7 @@ func _end_detection():
 				vertical_force = 4
 				print('Swiped UP')
 			else:
+				$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/state/current", 4)
 				print('Swiped DOWN')
 
 func _ready():
@@ -147,7 +148,7 @@ func on_die():
 	
 
 func on_toggle_magnet(activate):
-	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/magnet/blend_amount", 0.5)
+	$ANCHOR/MESH/MODEL/AnimationTree.set("parameters/magnet/blend_amount", 0.2)
 	$ANCHOR/MESH/MODEL/Purple/Armature/Skeleton/MAGNET.visible = activate
 	magnet_active = activate
 

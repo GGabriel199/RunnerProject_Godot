@@ -1,0 +1,178 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scripts/WORLD.gd" type="Script" id=1]
+[ext_resource path="res://scenes/PLAYER.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/textures/buttons/tile001.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/buttons/tile000.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/buttons/tile002.png" type="Texture" id=5]
+[ext_resource path="res://assets/models/fonts/new_dynamicfont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/textures/buttons/pause_button.png" type="Texture" id=7]
+[ext_resource path="res://scripts/Ui_manager.gd" type="Script" id=8]
+[ext_resource path="res://assets/BGM/coin.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/BGM/hit.ogg" type="AudioStream" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.866667, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[node name="WORLD" type="Spatial"]
+pause_mode = 1
+script = ExtResource( 1 )
+
+[node name="PARTS" type="Spatial" parent="."]
+
+[node name="PLAYER" parent="." instance=ExtResource( 2 )]
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="COINLEVEL" type="ProgressBar" parent="Control"]
+margin_left = 20.0
+margin_top = 807.0
+margin_right = 301.0
+margin_bottom = 830.0
+rect_rotation = 270.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false
+
+[node name="SPEEDBTN" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -98.0
+margin_right = 140.0
+margin_bottom = -28.0
+custom_fonts/font = ExtResource( 6 )
+text = "SPEED"
+icon = ExtResource( 4 )
+icon_align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+margin_left = 335.0
+margin_top = 20.0
+margin_right = 460.0
+margin_bottom = 132.0
+
+[node name="DISTANCE" type="Label" parent="Control/VBoxContainer"]
+margin_right = 125.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 6 )
+text = "2000 Distance"
+align = 2
+
+[node name="COINS" type="Label" parent="Control/VBoxContainer"]
+margin_top = 24.0
+margin_right = 125.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 6 )
+text = "30 Coins"
+align = 2
+
+[node name="SPEED" type="Label" parent="Control/VBoxContainer"]
+margin_top = 48.0
+margin_right = 125.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 6 )
+text = "2 SPEED"
+align = 2
+
+[node name="pause_menu" type="Control" parent="Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="Control/pause_menu"]
+modulate = Color( 1, 1, 1, 0.784314 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/pause_menu/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/pause_menu/Panel/CenterContainer"]
+margin_left = 112.0
+margin_top = 342.0
+margin_right = 368.0
+margin_bottom = 498.0
+
+[node name="title" type="Label" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 6 )
+text = "PAUSED"
+
+[node name="resume_button" type="TextureButton" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 256.0
+margin_bottom = 88.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_disabled = ExtResource( 5 )
+
+[node name="btn_txt" type="Label" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer/resume_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 6 )
+text = "RESUME"
+align = 1
+valign = 1
+
+[node name="menu_button" type="TextureButton" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 92.0
+margin_right = 256.0
+margin_bottom = 156.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_disabled = ExtResource( 5 )
+
+[node name="btn_txt" type="Label" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer/menu_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 6 )
+text = "MENU"
+align = 1
+valign = 1
+
+[node name="pause_button" type="TextureButton" parent="Control"]
+anchor_left = 0.0416667
+anchor_top = 0.0261905
+anchor_right = 0.125
+anchor_bottom = 0.0738095
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Ui_manager" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="BGAudio" type="Spatial" parent="."]
+
+[node name="coin_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
+stream = ExtResource( 9 )
+
+[node name="hit_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
+stream = ExtResource( 10 )
+
+[node name="dead_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
+
+[connection signal="pressed" from="Control/pause_menu/Panel/CenterContainer/VBoxContainer/resume_button" to="Ui_manager" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Control/pause_menu/Panel/CenterContainer/VBoxContainer/menu_button" to="Ui_manager" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Control/pause_button" to="Ui_manager" method="_on_pause_button_pressed"]

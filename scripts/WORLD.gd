@@ -40,6 +40,7 @@ func _ready():
 	$Control/SPEEDBTN.connect("pressed", self, "on_speed")
 	Globals.connect("on_unload_part", self, "on_unload_part")
 	Globals.connect("on_coin_magnet_collision", self, "on_coin_magnet_collision")
+	$Theme1.play()
 	
 	# spawn a few parts in the beginning
 	# the index makes sure no obstacles are spawned
@@ -50,9 +51,9 @@ func _ready():
 func _process(delta):
 	current_speed += delta * 0.4
 	distance += delta * current_speed * 0.1
-	$Control/VBoxContainer/COINS.text = "%s Coins |" % [int(coins)]
-	$Control/VBoxContainer/DISTANCE.text = "%s Distance |" % [int(distance)]
-	$Control/VBoxContainer/SPEED.text = "%s Speed" % [int(current_speed)]
+	$Control/COINS.text = "$ %s" % [int(coins)]
+	$Control/DISTANCE.text = "DIST: %s" % [int(distance)]
+	$Control/SPEED.text = "SP: %s" % [int(current_speed)]
 
 	# switch the theme based on time
 	theme_switch_time -= delta

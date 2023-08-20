@@ -6,7 +6,9 @@ func _ready():
 
 func _on_play_button_pressed():
 	get_tree().change_scene("res://scenes/WORLD.tscn")
+	$ClickIn.play()
 
 
 func _on_options_button_pressed():
 	$menu_diag/options_panel.show()
+	$ClickIn.play()

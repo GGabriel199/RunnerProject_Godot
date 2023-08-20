@@ -8,3 +8,12 @@ func _process(delta):
 
 func _on_back_btn_pressed():
 	$"..".hide()
+	$"../ClickOut".play()
+
+
+func _on_toggle_music_pressed():
+	pass # Replace with function body.
+
+
+func _on_toggle_sfx_pressed():
+	pass # Replace with function body.

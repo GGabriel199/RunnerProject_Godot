@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/textures/buttons/tile001.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/buttons/tile000.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/buttons/tile002.png" type="Texture" id=3]
 [ext_resource path="res://assets/models/fonts/new_dynamicfont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/models/fonts/nasalisationText.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/models/fonts/nasalisationMid.tres" type="DynamicFont" id=6]
 
 [node name="MYTHEME" type="Control"]
 anchor_right = 1.0
@@ -17,9 +19,23 @@ texture_pressed = ExtResource( 1 )
 texture_disabled = ExtResource( 3 )
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="."]
+[node name="LabelTitle" type="Label" parent="."]
 margin_top = 95.0
 margin_right = 101.0
 margin_bottom = 115.0
 custom_fonts/font = ExtResource( 4 )
-text = "Sample text"
+text = "Sample Title"
+
+[node name="LabelMiddle" type="Label" parent="."]
+margin_top = 166.0
+margin_right = 158.0
+margin_bottom = 197.0
+custom_fonts/font = ExtResource( 6 )
+text = "Sample Mid"
+
+[node name="LabelText" type="Label" parent="."]
+margin_top = 216.0
+margin_right = 115.0
+margin_bottom = 236.0
+custom_fonts/font = ExtResource( 5 )
+text = "Sample Small"

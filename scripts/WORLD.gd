@@ -40,7 +40,7 @@ func _ready():
 	$Control/SPEEDBTN.connect("pressed", self, "on_speed")
 	Globals.connect("on_unload_part", self, "on_unload_part")
 	Globals.connect("on_coin_magnet_collision", self, "on_coin_magnet_collision")
-	$Theme1.play()
+	$BGAudio/Theme1.play()
 	
 	# spawn a few parts in the beginning
 	# the index makes sure no obstacles are spawned

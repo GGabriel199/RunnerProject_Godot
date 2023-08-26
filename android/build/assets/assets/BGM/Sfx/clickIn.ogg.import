@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clickIn.ogg-ea9b60a3c77eeb132973a752a36b2476.oggstr"
+
+[deps]
+
+source_file="res://assets/BGM/Sfx/clickIn.ogg"
+dest_files=[ "res://.import/clickIn.ogg-ea9b60a3c77eeb132973a752a36b2476.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

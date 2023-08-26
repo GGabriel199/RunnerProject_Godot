@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/textures/buttons/tile001.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/buttons/tile000.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/buttons/tile002.png" type="Texture" id=3]
+[ext_resource path="res://assets/models/fonts/new_dynamicfont.tres" type="DynamicFont" id=4]
+
+[node name="Panel" type="Panel"]
+modulate = Color( 1, 1, 1, 0.784314 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 112.0
+margin_top = 342.0
+margin_right = 368.0
+margin_bottom = 498.0
+
+[node name="title" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 4 )
+text = "PAUSED"
+
+[node name="resume_button" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 256.0
+margin_bottom = 88.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+texture_disabled = ExtResource( 3 )
+
+[node name="btn_txt" type="Label" parent="CenterContainer/VBoxContainer/resume_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "RESUME"
+align = 1
+valign = 1
+
+[node name="menu_button" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+margin_top = 92.0
+margin_right = 256.0
+margin_bottom = 156.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+texture_disabled = ExtResource( 3 )
+
+[node name="btn_txt" type="Label" parent="CenterContainer/VBoxContainer/menu_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "MENU"
+align = 1
+valign = 1

@@ -1,12 +1,17 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/SceneObj/Materiais_001.material" type="Material" id=1]
-[ext_resource path="res://assets/textures/buttons/tile001.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/buttons/tile000.png" type="Texture" id=3]
-[ext_resource path="res://assets/textures/buttons/tile002.png" type="Texture" id=4]
-[ext_resource path="res://assets/models/fonts/new_dynamicfont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/models/fonts/nasalisationText.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/textures/buttons/Sprite-0002.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/buttons/Sprite-0001.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/NEPTUNE RUNNER Title.png" type="Texture" id=5]
 [ext_resource path="res://scripts/MENU.gd" type="Script" id=6]
 [ext_resource path="res://scenes/GUI/options_panel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://default_env.tres" type="Environment" id=8]
+[ext_resource path="res://assets/textures/Dirt.png" type="Texture" id=9]
+[ext_resource path="res://assets/BGM/Sfx/clickIn.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/BGM/MenuTheme.ogg" type="AudioStream" id=11]
+[ext_resource path="res://addons/object_pooling/theme.tres" type="Theme" id=12]
 
 [sub_resource type="Image" id=61]
 data = {
@@ -2514,11 +2519,11 @@ surfaces/0 = {
 }
 
 [sub_resource type="SpatialMaterial" id=20]
-albedo_color = Color( 0.364706, 0.219608, 0.454902, 1 )
+albedo_texture = ExtResource( 9 )
 
 [sub_resource type="PlaneMesh" id=57]
 material = SubResource( 20 )
-size = Vector2( 20, 82 )
+size = Vector2( 60, 150 )
 
 [sub_resource type="Skin" id=21]
 
@@ -2801,8 +2806,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.478996, 0, -3.87993 )
 [node name="StonePath" type="MeshInstance" parent="CORRIDOR_SPACE_0"]
 mesh = SubResource( 1 )
 
+[node name="StonePath2" type="MeshInstance" parent="CORRIDOR_SPACE_0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -81.6178 )
+mesh = SubResource( 1 )
+
 [node name="Floor1" type="MeshInstance" parent="CORRIDOR_SPACE_0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2611, 0, -16.4288 )
 mesh = SubResource( 57 )
 skin = SubResource( 21 )
 
@@ -2812,83 +2821,113 @@ mesh = SubResource( 58 )
 skeleton = NodePath("../..")
 
 [node name="Floor2" type="MeshInstance" parent="CORRIDOR_SPACE_0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0928, 0, -33.3998 )
 mesh = SubResource( 57 )
 skin = SubResource( 21 )
 
 [node name="Trees" type="MultiMeshInstance" parent="CORRIDOR_SPACE_0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.19824, 0, 10.857 )
+multimesh = SubResource( 59 )
+
+[node name="Trees3" type="MultiMeshInstance" parent="CORRIDOR_SPACE_0"]
+transform = Transform( -0.999973, 0, -0.00736531, 0, 1, 0, 0.00736531, 0, -0.999973, -43.9589, 0, -26.5128 )
 multimesh = SubResource( 59 )
 
 [node name="Trees2" type="MultiMeshInstance" parent="CORRIDOR_SPACE_0"]
 multimesh = SubResource( 60 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.939693, -0.116978, 0.321394, -0.098649, 0.807057, 0.582175, -0.327485, -0.578771, 0.746846, 5.21652, 13.3321, 13.505 )
+transform = Transform( 0.939692, -0.116978, 0.321394, -0.132687, 0.741411, 0.657802, -0.315234, -0.660776, 0.681177, 5.21652, 13.3321, 13.505 )
 current = true
 
 [node name="menu_diag" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="play_button" type="TextureButton" parent="menu_diag"]
+[node name="TextureRect" type="TextureRect" parent="menu_diag"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -240.0
+margin_top = 48.0
+margin_right = 272.0
+margin_bottom = 304.0
+texture = ExtResource( 5 )
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu_diag"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -129.0
-margin_top = -177.0
-margin_right = 127.0
-margin_bottom = -113.0
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 2 )
-texture_disabled = ExtResource( 4 )
+margin_left = -96.0
+margin_top = -270.0
+margin_right = -32.0
+margin_bottom = -202.0
+rect_scale = Vector2( 3, 3 )
 
-[node name="play_txt" type="Label" parent="menu_diag/play_button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -128.0
-margin_bottom = -32.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = ExtResource( 5 )
+[node name="play_button" type="TextureButton" parent="menu_diag/VBoxContainer"]
+margin_right = 64.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+
+[node name="play_txt" type="Label" parent="menu_diag/VBoxContainer/play_button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.0
+margin_top = -14.0
+margin_right = 26.0
+margin_bottom = 14.0
+theme = ExtResource( 12 )
+custom_fonts/font = ExtResource( 2 )
 text = "PLAY"
 align = 1
 valign = 1
 
-[node name="options_button" type="TextureButton" parent="menu_diag"]
-margin_left = 111.0
-margin_top = 746.0
-margin_right = 367.0
-margin_bottom = 810.0
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 2 )
-texture_disabled = ExtResource( 4 )
+[node name="options_button" type="TextureButton" parent="menu_diag/VBoxContainer"]
+margin_top = 36.0
+margin_right = 64.0
+margin_bottom = 68.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
-[node name="options_txt" type="Label" parent="menu_diag/options_button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -128.0
-margin_bottom = -32.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = ExtResource( 5 )
+[node name="options_txt" type="Label" parent="menu_diag/VBoxContainer/options_button"]
+anchor_left = 0.6875
+anchor_top = 0.625
+anchor_right = 0.6875
+anchor_bottom = 0.625
+margin_left = -42.0
+margin_top = -14.0
+margin_right = 42.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.7, 0.7 )
+theme = ExtResource( 12 )
+custom_fonts/font = ExtResource( 2 )
 text = "OPTIONS"
 align = 1
 valign = 1
-
-[node name="game_title" type="Label" parent="menu_diag"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -153.0
-margin_top = 47.0
-margin_right = -53.0
-margin_bottom = 67.0
-rect_scale = Vector2( 3, 3 )
-custom_fonts/font = ExtResource( 5 )
-text = "RUNNER???"
-align = 1
-valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="options_panel" parent="menu_diag" instance=ExtResource( 7 )]
 visible = false
 
-[connection signal="pressed" from="menu_diag/play_button" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="menu_diag/options_button" to="." method="_on_options_button_pressed"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 8 )
+
+[node name="ClickIn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="MenuTheme" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 11 )
+
+[connection signal="pressed" from="menu_diag/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="menu_diag/VBoxContainer/options_button" to="." method="_on_options_button_pressed"]

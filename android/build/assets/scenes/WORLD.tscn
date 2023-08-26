@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/WORLD.gd" type="Script" id=1]
 [ext_resource path="res://scenes/PLAYER.tscn" type="PackedScene" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://scripts/Ui_manager.gd" type="Script" id=8]
 [ext_resource path="res://assets/BGM/coin.ogg" type="AudioStream" id=9]
 [ext_resource path="res://assets/BGM/hit.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/BGM/Theme1.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/models/fonts/nasalisationMid.tres" type="DynamicFont" id=12]
+[ext_resource path="res://assets/BGM/Sfx/clickIn.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/BGM/Sfx/clickOut.ogg" type="AudioStream" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.866667, 0, 1 )
@@ -49,43 +53,43 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -128.0
-margin_top = -98.0
-margin_right = 140.0
-margin_bottom = -28.0
+margin_left = -107.0
+margin_top = -72.9999
+margin_right = 161.0
+margin_bottom = -2.99994
+rect_scale = Vector2( 0.8, 0.8 )
 custom_fonts/font = ExtResource( 6 )
 text = "SPEED"
 icon = ExtResource( 4 )
 icon_align = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-margin_left = 335.0
-margin_top = 20.0
-margin_right = 460.0
-margin_bottom = 132.0
-
-[node name="DISTANCE" type="Label" parent="Control/VBoxContainer"]
-margin_right = 125.0
-margin_bottom = 20.0
+[node name="DISTANCE" type="Label" parent="Control"]
+margin_left = 293.0
+margin_top = 22.0
+margin_right = 565.0
+margin_bottom = 83.0
+rect_scale = Vector2( 0.6, 0.6 )
 custom_fonts/font = ExtResource( 6 )
-text = "2000 Distance"
+text = "Dist: 2000"
 align = 2
 
-[node name="COINS" type="Label" parent="Control/VBoxContainer"]
-margin_top = 24.0
+[node name="COINS" type="Label" parent="Control"]
+margin_left = 10.0
+margin_top = 101.0
 margin_right = 125.0
-margin_bottom = 44.0
+margin_bottom = 162.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 6 )
-text = "30 Coins"
-align = 2
+text = "$ 30"
 
-[node name="SPEED" type="Label" parent="Control/VBoxContainer"]
-margin_top = 48.0
-margin_right = 125.0
-margin_bottom = 68.0
+[node name="SPEED" type="Label" parent="Control"]
+margin_left = 10.0
+margin_top = 137.0
+margin_right = 143.0
+margin_bottom = 198.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 6 )
-text = "2 SPEED"
-align = 2
+text = "SP: 2"
 
 [node name="pause_menu" type="Control" parent="Control"]
 pause_mode = 2
@@ -104,20 +108,25 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/pause_menu/Panel/CenterContainer"]
 margin_left = 112.0
-margin_top = 342.0
+margin_top = 328.0
 margin_right = 368.0
-margin_bottom = 498.0
+margin_bottom = 511.0
 
 [node name="title" type="Label" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
 margin_right = 256.0
-margin_bottom = 20.0
-custom_fonts/font = ExtResource( 6 )
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 12 )
 text = "PAUSED"
 
-[node name="resume_button" type="TextureButton" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
-margin_top = 24.0
+[node name="Gap4" type="Control" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 35.0
 margin_right = 256.0
-margin_bottom = 88.0
+margin_bottom = 35.0
+
+[node name="resume_button" type="TextureButton" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 39.0
+margin_right = 256.0
+margin_bottom = 103.0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_disabled = ExtResource( 5 )
@@ -130,10 +139,25 @@ text = "RESUME"
 align = 1
 valign = 1
 
-[node name="menu_button" type="TextureButton" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
-margin_top = 92.0
+[node name="Gap" type="Control" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 107.0
 margin_right = 256.0
-margin_bottom = 156.0
+margin_bottom = 107.0
+
+[node name="Gap2" type="Control" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 111.0
+margin_right = 256.0
+margin_bottom = 111.0
+
+[node name="Gap3" type="Control" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 115.0
+margin_right = 256.0
+margin_bottom = 115.0
+
+[node name="menu_button" type="TextureButton" parent="Control/pause_menu/Panel/CenterContainer/VBoxContainer"]
+margin_top = 119.0
+margin_right = 256.0
+margin_bottom = 183.0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_disabled = ExtResource( 5 )
@@ -158,8 +182,6 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-
 [node name="Ui_manager" type="Node" parent="."]
 script = ExtResource( 8 )
 
@@ -172,6 +194,15 @@ stream = ExtResource( 9 )
 stream = ExtResource( 10 )
 
 [node name="dead_sound" type="AudioStreamPlayer3D" parent="BGAudio"]
+
+[node name="Theme1" type="AudioStreamPlayer3D" parent="BGAudio"]
+stream = ExtResource( 11 )
+
+[node name="ClickIn" type="AudioStreamPlayer" parent="BGAudio"]
+stream = ExtResource( 13 )
+
+[node name="ClickOut" type="AudioStreamPlayer" parent="BGAudio"]
+stream = ExtResource( 14 )
 
 [connection signal="pressed" from="Control/pause_menu/Panel/CenterContainer/VBoxContainer/resume_button" to="Ui_manager" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Control/pause_menu/Panel/CenterContainer/VBoxContainer/menu_button" to="Ui_manager" method="_on_menu_button_pressed"]
